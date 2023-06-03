@@ -32,7 +32,7 @@ class DemoApplicationTests {
 		studentService.getUpdateStudent(transactionA);
 
 		assertThrows(OptimisticLockException.class, () -> {
-            transactionB.setAge(student.getAge()+2);
+                        transactionB.setAge(student.getAge()+2);
 			studentService.getUpdateStudent(transactionB);
 		});
 
