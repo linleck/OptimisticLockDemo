@@ -24,13 +24,15 @@ class DemoApplicationTests {
 	void testConcurrentModification() throws InterruptedException {
 		Student student = new Student(1,"Tanaka",21);
 		studentService.createStudent(student);
+
 		Student transactionA = studentRepository.findById(1).orElseThrow(() -> new EntityNotFoundException("student not found"));
 
 		Student transactionB = studentRepository.findById(1).orElseThrow(() -> new EntityNotFoundException("student not found"));
 		transactionA .setAge(student.getAge()+2);
 		studentService.getUpdateStudent(transactionA);
 
-		assertThrows(OptimisticLockException.class, () -> {transactionB.setAge(student.getAge()+2);
+		assertThrows(OptimisticLockException.class, () -> {
+            transactionB.setAge(student.getAge()+2);
 			studentService.getUpdateStudent(transactionB);
 		});
 
