@@ -22,7 +22,7 @@ class DemoApplicationTests {
 
 	@Test
 	void testConcurrentModification() throws InterruptedException {
-		Student student = new Student(17,"Tanaka",21);
+		Student student = new Student(1,"Tanaka",21);
 		studentService.createStudent(student);
 		Student transactionA = studentRepository.findById(1).orElseThrow(() -> new EntityNotFoundException("student not found"));
 
