@@ -27,7 +27,7 @@ public class StudentService {
             student.setVersion(updateStudent.getVersion()+1);
             return createStudent(student);
         } else {
-            throw new OptimisticLockException("Expected version ="+updateStudent.getVersion()+"but got"+student.getVersion()+". Concurrent modification detected");
+            throw new OptimisticLockException("Expected version = "+updateStudent.getVersion()+"but got "+student.getVersion()+". Concurrent modification detected");
         }
     }
 
