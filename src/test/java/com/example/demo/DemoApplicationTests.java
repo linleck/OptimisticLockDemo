@@ -29,11 +29,11 @@ class DemoApplicationTests {
 
 		Student transactionB = studentRepository.findById(1).orElseThrow(() -> new EntityNotFoundException("student not found"));
 		transactionA.setAge(student.getAge()+2);
-		studentService.getUpdateStudent(transactionA);
+		studentService.updateStudent(transactionA);
 
 		assertThrows(OptimisticLockException.class, () -> {
 			transactionB.setAge(student.getAge()+2);
-			studentService.getUpdateStudent(transactionB);
+			studentService.updateStudent(transactionB);
 		});
 
 	}

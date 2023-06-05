@@ -53,4 +53,10 @@ public class Student {
     public Integer getVersion() {
         return version;
     }
+    
+    public void updateAge(int age, int version) {
+        this.age = age;
+        this.version++;
+    }
+
 }
