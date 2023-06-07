@@ -54,7 +54,7 @@ public class Student {
         return version;
     }
     
-    public void updateAge(int age, int version) {
+    public void updateAge(int age) {
         this.age = age;
         this.version++;
     }

@@ -20,10 +20,10 @@ public class StudentService {
         return studentRepository.save(student);
     }
     @Transactional
-    public Student updateStudent(Student updateStudent) {
+    public Student updateStudentAge(Student updateStudent) {
         Student student = studentRepository.findById(updateStudent.getId()).orElseThrow(() -> new IllegalArgumentException("Student not found"));
         if (updateStudent.getVersion() == student.getVersion()){
-            student.updateAge(updateStudent.getAge(),updateStudent.getVersion());
+            student.updateAge(updateStudent.getAge());
             return createStudent(student);
         } else {
             throw new OptimisticLockException("Expected version = "+updateStudent.getVersion()+"but got "+student.getVersion()+". Concurrent modification detected");
