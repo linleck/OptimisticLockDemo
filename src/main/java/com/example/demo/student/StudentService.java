@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
+@Transactional
 public class StudentService {
     private final StudentRepository studentRepository;
 
@@ -15,16 +16,14 @@ public class StudentService {
         this.studentRepository = productRepository;
     }
 
-    @Transactional
     public Student createStudent(Student student){
         return studentRepository.save(student);
     }
-    @Transactional
     public Student updateStudentAge(Student updateStudent) {
         Student student = studentRepository.findById(updateStudent.getId()).orElseThrow(() -> new IllegalArgumentException("Student not found"));
         if (updateStudent.getVersion() == student.getVersion()){
             student.updateAge(updateStudent.getAge());
-            return createStudent(student);
+            return studentRepository.save(student);
         } else {
             throw new OptimisticLockException("Expected version = "+updateStudent.getVersion()+"but got "+student.getVersion()+". Concurrent modification detected");
         }
